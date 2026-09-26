@@ -1,0 +1,27 @@
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['G'],
+    'F': [],
+    'G': []
+}
+
+def dfs(start):
+    stack = [start]
+    visited = []
+
+    while stack:
+        node = stack.pop()
+
+        if node not in visited:
+            print(node, end=" ")
+            visited.append(node)
+
+            for neighbour in reversed(graph[node]):
+                if neighbour not in visited:
+                    stack.append(neighbour)
+
+print("Following is the Depth-First Search:")
+dfs('A')

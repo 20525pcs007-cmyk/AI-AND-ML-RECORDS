@@ -1,0 +1,16 @@
+import random
+class Treasure:
+    def __init__(self,gold):
+        self.gold = gold
+    def __repr__(self):
+        return "Treasure with %d gold coins."%self.gold
+treasures = [Treasure(random.randint(200,1000))for i in range(4)]
+print("Hidden Treasures:")
+print(treasures)
+print()
+def gold_amount(treasure):
+    return treasure.gold
+print("Gold in Second Treasure:", gold_amount(treasures[1]))
+print()
+best = max(treasures, key = gold_amount)
+print("Most Valuable Treasure:", best)

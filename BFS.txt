@@ -1,0 +1,23 @@
+boarding_map = {
+    "Gate": ["Row 1", "Row 2"],
+    "Row 1": ["Seat 1", "Seat 2"],
+    "Row 2": ["Seat 3"],
+    "Seat 1": [],
+    "Seat 2": [],
+    "Seat 3": []
+}
+
+visited = []
+queue = ["Gate"]
+visited.append("Gate")
+
+print("Boarding Order:")
+
+while queue:
+    place = queue.pop(0)
+    print(place)
+
+    for i in boarding_map[place]:
+        if i not in visited:
+            visited.append(i)
+            queue.append(i)

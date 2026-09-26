@@ -1,0 +1,33 @@
+import numpy as np
+
+X = np.array([
+    [20,10,1,5],
+    [40,20,2,4],
+    [80,45,5,3],
+    [100,60,7,2],
+    [30,15,1,6],
+    [120,70,8,2]
+])
+
+y = np.array([0,0,1,1,0,1])
+
+Xmax = X.max(axis=0)
+X = X / Xmax
+
+W = np.random.randn(4) * 0.01
+b = 0
+
+sigmoid = lambda z: 1/(1 + np.exp(-np.clip(z,-500,500)))
+
+for _ in range(1000):
+    p = sigmoid(X @ W + b)
+    error = y - p
+    W += 0.1 * X.T @ error
+    b += 0.1 * error.sum()
+
+road = np.array([90,50,6,3]) / Xmax
+
+risk = sigmoid(road @ W + b)
+
+print("Flood Risk:", round(risk,2))
+print("Prediction:", "Flood Risk" if risk >= 0.5 else "SAFE")

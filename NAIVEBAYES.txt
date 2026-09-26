@@ -1,0 +1,18 @@
+P_approve = 0.6
+P_reject = 0.4
+P_income_approve = 0.8
+P_income_reject = 0.3
+income = input("High Income? (Yes/No):")
+if income.lower() == "Yes":
+    P_income = (P_income_approve*P_approve) + (P_income_reject*P_reject)
+    approve = (P_income_approve*P_approve)/P_income
+    reject = (P_income_reject*P_reject)/P_income
+else:
+    approve = 1 - P_income_approve
+    reject = 1 - P_income_reject
+print("Approval Probability =", round(approve,2))
+print("Rejection Probability =", round(reject,2))
+if approve > reject:
+    print("Prediction: LOAN APPROVED")
+else:
+    print("Prediction: LOAN REJECTED")

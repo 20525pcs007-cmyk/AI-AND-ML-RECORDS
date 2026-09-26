@@ -1,0 +1,15 @@
+from sklearn.ensemble import StackingClassifier, RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
+X = [[90, 85, 9, 5, 0],[60, 55, 5, 2, 1],[45, 40, 3, 1, 3],[70, 65, 7, 3, 1],[50, 45, 4, 1, 2],[85, 80, 9, 5, 0]]
+y = [0, 1, 2, 1, 2, 0]
+model = StackingClassifier([
+    ('DT', DecisionTreeClassifier()),
+    ('RF', RandomForestClassifier(n_estimators = 10))],
+    final_estimator = LogisticRegression(), cv = 2)
+model.fit(X, y)
+a, m, ass, s, f = 58, 52, 5, 2, 2
+score = .30*(100-a)/100+.25*(100-m)/100+.15*(10-ass)/10+.15*(10-ass)/10+.15*(6-s)/6+.15*f/3
+r = model.predict([[a, m, ass, s, f]])[0]
+print("Risk Score:", round(score, 2))
+print("Dropout Risk:", ["LOW", "MEDIUM", "HIGH"][r])
